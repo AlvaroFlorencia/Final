@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 //using UnityStandardAssets.Vehicles.Car;
@@ -7,9 +8,11 @@ using UnityEngine.UI;
 public class checkan : MonoBehaviour {
 	public Text texto;
 	public Text answer;
-	//int score1;
-    string[] questions = { "¿2+2?", "¿3+3?", "¿4+4?" };
-    string[] answers = { "4", "6", "8" };
+    //int score1;
+    public TextAsset qtFile;
+    public TextAsset ansFile;
+    string[] questions;
+    string[] answers;
 	int aleatorio=1000;
 	public GameObject Controls;
 	public GameObject q;
@@ -24,18 +27,17 @@ public class checkan : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
         carCtrl = FindObjectOfType<CarCtrl>();
+        questions = qtFile.text.Split("\n"[0]);
+        answers = ansFile.text.Split("\n"[0]);
+        aleatorio = Random.Range(0, questions.Length - 1);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		print ("la resp:" + answer.text);
-		print("lo que debe ser:" + answers[aleatorio]);
+
+    // Update is called once per frame
+    void Update () {
+        
         if (answers[aleatorio] == answer.text)
         {
-			
-         
             a.text = "";
             if (carCtrl)
             {
@@ -62,7 +64,11 @@ public class checkan : MonoBehaviour {
             }
 			Destroy (gameObject);
         }
-
+        else
+        {
+            print(answers[aleatorio] + " no es igual a " + answer.text);
+        }
+       
     }
 
 
@@ -70,7 +76,7 @@ public class checkan : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
 		
-		aleatorio = Random.Range(0, questions.Length - 1);
+		
 		texto.text = questions[aleatorio];
 		print ("tocandome");
         if (other.tag == "Player")

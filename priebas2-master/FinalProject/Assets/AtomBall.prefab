@@ -214,12 +214,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texto: {fileID: 0}
   answer: {fileID: 0}
-  score: {fileID: 0}
+  qtFile: {fileID: 4900000, guid: 14e8a42c279f54d4f94c7a30108b86b4, type: 3}
+  ansFile: {fileID: 4900000, guid: b66e05329fec5e34c82654d1aaf19f19, type: 3}
   Controls: {fileID: 0}
   q: {fileID: 0}
   a: {fileID: 0}
   panel: {fileID: 0}
   particle1: {fileID: 1797801229666662}
+  car: {fileID: 0}
+  carCtrl: {fileID: 0}
+  isOnQuestion: 1
+  score: {fileID: 0}
+  plus: 1
 --- !u!135 &135613625990379660
 SphereCollider:
   m_ObjectHideFlags: 1
