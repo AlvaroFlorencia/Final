@@ -11,9 +11,9 @@ public class checkan : MonoBehaviour {
     //int score1;
     public TextAsset qtFile;
     public TextAsset ansFile;
-    string[] questions;
-    string[] answers;
-	int aleatorio=1000;
+    string[] questions = {"¿2+2?","¿3+3?","¿4+4?"};
+    string[] answers = { "4", "6", "8" };
+    int aleatorio=1000;
 	public GameObject Controls;
 	public GameObject q;
 	public InputField a;
@@ -28,55 +28,53 @@ public class checkan : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         carCtrl = FindObjectOfType<CarCtrl>();
-        questions = qtFile.text.Split("\n"[0]);
-        answers = ansFile.text.Split("\n"[0]);
+        //questions = qtFile.text.Split("\n"[0]);
+        //answers = ansFile.text.Split("\n"[0]);
         aleatorio = Random.Range(0, questions.Length - 1);
     }
 
     // Update is called once per frame
-    void Update () {
+        void Update () {
         
-        if (answers[aleatorio] == answer.text)
-        {
-            a.text = "";
-            if (carCtrl)
+            if (answers[aleatorio] == answer.text)
             {
-                print("Correcto");
-                score.gainPoints();
-                Controls.SetActive(true);
-                q.SetActive(false);
-                a.gameObject.SetActive(false);
-                panel.SetActive(false);
-                carCtrl.enableControls();
-                particle1.SetActive(false);
+                a.text = "";
+                if (carCtrl)
+                {
+                    print("Correcto");
+                    score.gainPoints();
+                    Controls.SetActive(true);
+                    q.SetActive(false);
+                    a.gameObject.SetActive(false);
+                    panel.SetActive(false);
+                    carCtrl.enableControls();
+                    particle1.SetActive(false);
+                }
+                else
+                {
+                    score.gainPoints();
+                    carCtrl = FindObjectOfType<CarCtrl>();
+                    Controls.SetActive(true);
+                    q.SetActive(false);
+                    a.gameObject.SetActive(false);
+                    panel.SetActive(false);
+                    carCtrl.enableControls();
+                    particle1.SetActive(false);
+                
+                }
+			    Destroy (gameObject);
             }
             else
             {
-                score.gainPoints();
-                carCtrl = FindObjectOfType<CarCtrl>();
-                Controls.SetActive(true);
-                q.SetActive(false);
-                a.gameObject.SetActive(false);
-                panel.SetActive(false);
-                carCtrl.enableControls();
-                particle1.SetActive(false);
                 
             }
-			Destroy (gameObject);
-        }
-        else
-        {
-            print(answers[aleatorio] + " no es igual a " + answer.text);
-        }
        
-    }
+        }
 
 
 
     private void OnTriggerEnter(Collider other)
     {
-		
-		
 		texto.text = questions[aleatorio];
 		print ("tocandome");
         if (other.tag == "Player")
